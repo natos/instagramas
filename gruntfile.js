@@ -21,10 +21,15 @@ module.exports = function(grunt) {
                     'src/*.js'
 
                 ],
-                "dest": [
-                    'dist/<%= pkg.name %>.min.js',
-                    'public/lib/<%= pkg.name %>.min.js'
-                ]
+                "dest": 'dist/<%= pkg.name %>.min.js'
+            }
+            "site": {
+                "src": [
+                    'src/jquery-ajax.js',
+                    'src/*.js'
+
+                ],
+                "dest": 'public/lib/<%= pkg.name %>.min.js'
             }
         },
         "watch": {
