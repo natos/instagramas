@@ -32,6 +32,8 @@
     var Instagramas = function(element) {
         var $this = this;
         $this.element = element;
+        $this.children = [];
+        $this.childrenLoaded = 1;
         $this.showTags = element.getAttribute('data-show-tags') === "true" || defaults.showTags;
         $this.showTagsCount = element.getAttribute('data-show-tags-count');
         $this.showLikes = element.getAttribute('data-show-likes') === "true" || defaults.showLikes;
@@ -61,6 +63,29 @@
         });
     };
     /**
+     * @method childLoaded
+     * @return this
+     */
+    Instagramas.prototype.childLoaded = function() {
+        var $this = this;
+        if ($this.children.length === $this.childrenLoaded) {
+            $this.childrenLoaded = null;
+            return $this.ready();
+        }
+        $this.childrenLoaded += 1;
+        return $this;
+    };
+    /**
+     * @method ready
+     * @return this
+     */
+    Instagramas.prototype.ready = function() {
+        var $this = this;
+            $this.element.setAttribute('data-state', 'ready');
+            $this.element.removeChild($this.loader);
+        return $this;
+    }
+    /**
      * @method get
      * @return promise
      */
@@ -83,18 +108,13 @@
 
     Instagramas.prototype.create = function(response) {
         var $this = this;
-            $this.children = [];
-        var i, _DELAY = 1500;
+        var i;
         if (!response.data) { return; }
         for (i = 0; i < response.data.length; i += 1) {
             $this.children.push(new Instagrama(response.data[i], $this));
         }
         $this.element.setAttribute('data-state', 'created');
-        setTimeout(function() {
-            $this.element.setAttribute('data-state', 'ready');
-            $this.element.removeChild($this.loader);
-        }, _DELAY);
-    }
+    };
 
 
     /**
@@ -140,6 +160,9 @@
         img.alt = $this.data.caption.text;
         img.src = $this.data.images[$this.parent.renderType].url;
         // img.src = $this.data.images.low_resolution.url;
+        img.onload = function() {
+          $this.parent.childLoaded.apply($this.parent, arguments);
+        };
         a.appendChild(img);
 
         // likes
@@ -179,10 +202,14 @@
 
     window.instagramas = {
         collection: []
-    }
+    };
 
-    for (var i = 0; i < instagramas.length; i += 1) {
-        window.instagramas.collection.push(new Instagramas(instagramas[i]));
-    }
+    /** start */
+
+    document.addEventListener("DOMContentLoaded", function start() {
+        for (var i = 0; i < instagramas.length; i += 1) {
+            window.instagramas.collection.push(new Instagramas(instagramas[i]));
+        }
+    });
 
 }(window, document));
