@@ -96,7 +96,7 @@ section pre[class*="language-"] {
 }
 
 .gallery .instagramas .instagrama-image,
-.gallery .instagramas .instagrama-video, {
+.gallery .instagramas .instagrama-video {
   opacity: 0;
   margin: 1rem;
   padding: 1rem;
@@ -207,9 +207,6 @@ section pre[class*="language-"] {
 */
 .instagramas[data-state="getting"] .loader {
   opacity: 1;
-}
-.instagramas[data-state="created"] .loader {
-  opacity: 5;
 }
 .instagramas[data-state="ready"] .loader {
   opacity: 0;

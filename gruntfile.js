@@ -29,13 +29,13 @@ module.exports = function(grunt) {
                     'src/*.js'
 
                 ],
-                "dest": 'public/lib/<%= pkg.name %>.min.js'
+                "dest": 'test/lib/<%= pkg.name %>.min.js'
             }
         },
         "watch": {
             "scripts": {
                 "files": ['src/*.js'],
-                "tasks": ['uglify'],
+                "tasks": ['compile'],
                 "options": {
                     "spawn": false,
                 }
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     // Compile web site
-    grunt.registerTask('compile', ['clean', 'copy', 'uglify']);
+    grunt.registerTask('compile', ['clean', 'uglify', 'copy']);
     grunt.registerTask('default', ['compile']);
 
 };
