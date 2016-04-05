@@ -21,7 +21,10 @@ module.exports = function(grunt) {
                     'src/*.js'
 
                 ],
-                "dest": 'dist/<%= pkg.name %>.min.js'
+                "dest": [
+                    'dist/<%= pkg.name %>.min.js',
+                    'public/lib/<%= pkg.name %>.min.js'
+                ]
             }
         },
         "watch": {
