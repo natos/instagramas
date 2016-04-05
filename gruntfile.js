@@ -42,6 +42,6 @@ module.exports = function(grunt) {
 
     // Compile web site
     grunt.registerTask('compile', ['clean', 'uglify']);
-    grunt.registerTask('default', ['compile', 'watch']);
+    grunt.registerTask('default', ['compile']);
 
 };
