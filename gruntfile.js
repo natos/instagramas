@@ -22,7 +22,7 @@ module.exports = function(grunt) {
 
                 ],
                 "dest": 'dist/<%= pkg.name %>.min.js'
-            }
+            },
             "site": {
                 "src": [
                     'src/jquery-ajax.js',
