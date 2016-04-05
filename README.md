@@ -2,8 +2,10 @@
 
 _This is a work in progress use at own risk_
 
+![Instagramas](https://raw.githubusercontent.com/natos/instagramas/master/test/instagramas.png)
+
 Instagramas will render a list of your latest instagrams. This version comes packed with jQuery's ajax module from version 1.11.1 (details ```"1.11.1 -css,-css/addGetHookIf,-css/curCSS,-css/defaultDisplay,-css/hiddenVisibleSelectors,-css/support,-css/swap,-css/var/cssExpand,-css/var/isHidden,-css/var/rmargin,-css/var/rnumnonpx,-effects,-effects/Tween,-effects/animatedSelector,-effects/support,-dimensions,-offset,-deprecated,-event-alias,-wrap"```).
-The bundle will execute with ```jQuery.noConflict``` function to leave ```window.$``` namespace free for any other version you are currently running. This particular version will be hosted in ```window.jQuery``` so is accesible by Instagramas.js
+The bundle will execute with ```jQuery.noConflict``` function to leave ```window.$``` namespace free for any other version you are currently running. This particular version will be hosted in ```window.jQuery``` so is accesible by Instagramas.js the idea is to remove this dependency in the next version.
 
 ## Properties
 
