@@ -9,29 +9,17 @@ The bundle will execute with ```jQuery.noConflict``` function to leave ```window
 
 List of properties:
 
-*data-access-token*
-Mandatory Instagram API Access Token
-    ```data-access-token _string_```
+* ```data-access-token {string}```  *Mandatory* Instagram API Access Token
 
-*data-show-tags*
-Optional when show tags is true will render a list of tags
-    ```data-show-tags _bool_```
+* ```data-show-tags {bool}```   Optional when show tags is true will render a list of tags, false by default
 
-*data-show-tags-count*
-Optional integer that defines how many tags will render
-    ```data-show-tags-count _int_```
+* ```data-show-tags-count {int}```  Optional integer that defines how many tags will render, all by default
 
-*data-show-likes*
-Optional when show likes is true will render likes counter
-    ```data-show-likes _bool_```
+* ```data-show-likes {bool}```    Optional when show likes is true will render likes counter, false by default
 
-*data-render-type*
-Optional render type defines the size of the Instagram, is thumbnail by default
-    ```data-render-type _string_ "thumbnail|low_resolution|standard_resolution"```
+* ```data-render-type {string}``` Optional values ```"thumbnail|low_resolution|standard_resolution"```, thumbnail by default
 
-*data-count*
-Optional how many Instagram will show, 5 by default
-    ```data-count _int_```
+* ```data-count {int}```  Optional how many Instagram will show, 5 by default
 
 ### Usage
 
@@ -60,7 +48,7 @@ See test page for more examples.
 
 ### Author
 
-    Natan Santolo (@natos)
+    Natan Santolo, @natos, natansantolo.com
 
 ### Unlicense
 
