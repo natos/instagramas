@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     var gruntConfig = {
 
         "clean": {
-            "content": ['dist/*']
+            "content": ['dist/*', 'public/*']
         },
 
         "pkg": grunt.file.readJSON('package.json'),
@@ -32,6 +32,14 @@ module.exports = function(grunt) {
                     "spawn": false,
                 }
             }
+        },
+        copy: {
+            site: {
+                expand: true,
+                cwd: 'test',
+                src: '**',
+                dest: 'public/'
+            }
         }
     };
 
@@ -39,9 +47,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
+    grunt.loadNpmTasks('grunt-contrib-copy');
     // Compile web site
-    grunt.registerTask('compile', ['clean', 'uglify']);
+    grunt.registerTask('compile', ['clean', 'copy', 'uglify']);
     grunt.registerTask('default', ['compile']);
 
 };
