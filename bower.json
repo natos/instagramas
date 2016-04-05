@@ -1,0 +1,23 @@
+{
+  "name": "instagramas",
+  "description": "Render latest instagrams",
+  "main": "gruntfile.js",
+  "authors": [
+    "Natan Santolo"
+  ],
+  "license": "UNLINCENSE",
+  "keywords": [
+    "instagram",
+    "photo",
+    "gallery"
+  ],
+  "homepage": "https://github.com/natos/instagramas",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
