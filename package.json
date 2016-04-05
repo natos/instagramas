@@ -1,0 +1,16 @@
+{
+  "name": "instagramas",
+  "version": "1.0.0",
+  "description": "Render latest instagrams",
+  "main": "gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "grunt test"
+  },
+  "author": "Natan Santolo",
+  "license": "UNLINCENSE"
+}
