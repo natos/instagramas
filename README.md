@@ -46,7 +46,7 @@ Full
 ></div>
 ```
 
-See test page for more examples.
+[See test page for more examples](http://natos.github.io/instagramas/).
 
 ### Author
 
