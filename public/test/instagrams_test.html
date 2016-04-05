@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Instagramas Demo Page</title>
+        <meta name="author" content="Natan Santolo">
+        <meta name="description" content="Instagramas Demo Page">
+        <meta name="keywords" content="Instagramas Instagram Demo">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="instagrams_test.css" />
+        <link rel="stylesheet" href="lib/prism.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <script>
+        // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        // ga('create', 'UA-28275462-1', 'auto');
+        // ga('send', 'pageview');
+        </script>
+    </head>
+    <body>
+        <header>
+            <p><a href="#styles">styles</a> <a href="http://github.com/natos/instagramas">source</a> <a href="http://github.com/natos/instagramas/issues">issues</a></p>
+            <h1><i class="fa fa-instagram"></i> Instagramas <span class="version">1.0.0</span></h1>
+        </header>
+        <section class="gallery demo">
+            <header>
+                <h3>Demo Gallery</h3>
+            </header>
+            <article
+                class="instagramas"
+                data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
+                ></article>
+        </section>
+        <section>
+            <article>
+                <p>This is pretty easy, let's start!</p>
+                <p>First go and get a valid access token from Instagram, if you are not so sure how to do it, you can find all you need in <a href="https://www.instagram.com/developer/authentication/" target="_blank">Instagram's API Documentation</a>, or follow this article <a href="http://jelled.com/instagram/access-token" target="_blank"><em>How to generate an Instagram Access Token</em></a>. Got it? Cool, let's continue.</p>
+                <p>To render a gallery the trick is to add instagramas.js script at the end of your document and add the class name "instagramas" to any element you want to be the container of the gallery, you can add as many as you want. The script will ask the DOM to find all the "instagramas" and will create a Instagram gallery using the <strong>data-access-token</strong> provided for each match.</p>
+                <p>To illustrate the implementation, please take a look at this simple example:</p>
+                <pre>
+                    <code class="language-html">
+    &lt!doctype html&gt;
+    &lt;html&gt;
+        &lt;head&gt;
+            ... initial code ...
+            &lt;link rel="stylesheet" href="dist/instagramas.min.css"&gt;&lt;/link&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+            ... your awesome code ...
+            &lt;div id="my-brand" class="instagramas" data-access-token="INSERT_ACCESS_TOKEN_HERE"&gt;&lt;/div&gt;
+            ... more stuff ...
+            &lt;section id="my-product" class="instagramas" data-access-token="INSERT_ACCESS_TOKEN_HERE"&gt;&lt;/section&gt;
+            ... final code ...
+            &lt;script src="dist/instagramas.min.js" &gt;&lt;/script&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+                    </code>
+                </pre>
+                <h3>Available properties</h3>
+                <p>The only mandatory property is the access token, get more information about access tokens at <a href="https://www.instagram.com/developer/authentication/" target="_blank">Instagram's API Documentation</a> page.</p>
+                <dl class="properties">
+                    <dt><strong>data-access-token*</strong> <em>string</em></dt>
+                    <dd><em>Mandatory</em> Instagram API Access Token
+                    <br><a href="http://jelled.com/instagram/access-token" target="_blank"><em>How to generate an Instagram Access Token</em></a></dd>
+
+                    <dt><strong>data-show-tags</strong> <em>bool</em></dt>
+                    <dd>Optional when <em>data-show-tags</em> is true will render a list of tags</dd>
+                    <dd>Default value <em>false</em></dd>
+
+                    <dt><strong>data-show-tags-count</strong> <em>int</em></dt>
+                    <dd>Optional integer that defines how many tags will render</dd>
+                    <dd>Default value <em>all</em></dd>
+
+                    <dt><strong>data-show-likes</strong> <em>bool</em></dt>
+                    <dd>Optional when <em>show-likes</em> is true will render likes counter</dd>
+                    <dd>Default value <em>false</em></dd>
+
+                    <dt><strong>data-render-type</strong> <em>string</em></dt>
+                    <dd>Optional render type defines the size of the Instagram, is thumbnail by default
+                    <br>Allowed values: thumbnail | low_resolution | standard_resolution</dd>
+                    <dd>Default value <em>thumbnail</em></dd>
+
+                    <dt><strong>data-count</strong> <em>int</em></dt>
+                    <dd>Optional how many Instagram will show
+                    <dd>Default value <em>5</em></dd>
+                </dl>
+            </article>
+        </section>
+        <section class="gallery minimal">
+            <header>
+                <h2>Minimal</h2>
+                <p>The minimal verision will show latest 5 Instagrams, no likes count or tags in thumbnail format.</p>
+            </header>
+            <article
+                class="instagramas"
+                data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
+                ></article>
+            <footer>
+                <h4><i class="fa fa-code"></i> Code</h4>
+                <pre>
+                    <code class="language-html">
+    &lt;article class="instagramas" data-access-token="INSERT_ACCESS_TOKEN_HERE"&gt;&lt;/article&gt;
+                    </code>
+                </pre>
+            </footer>
+        </section>
+        <section class="gallery thumbnails">
+            <header>
+                <h2>Thumbnails</h2>
+                <p>Latest 21 Instagrams showing likes count and only one tag in thumbnail format.</p>
+            </header>
+            <article
+                class="instagramas"
+                data-show-tags="true"
+                data-show-tags-count="1"
+                data-show-likes="false"
+                data-render-type="thumbnail"
+                data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
+                data-count="21"
+                ></article>
+            <footer>
+                <h4><i class="fa fa-code"></i> Code</h4>
+                <pre>
+                    <code class="language-html">
+    &lt;article
+        class="instagramas"
+        data-show-tag="true"
+        data-show-tags-count="1"
+        data-show-likes="false"
+        data-render-type="thumbnail"
+        data-access-token="INSERT_ACCESS_TOKEN_HERE"
+        data-count="21"&gt;
+    &lt;/article&gt;
+                    </code>
+                </pre>
+            </footer>
+        </section>
+        <section class="gallery low-resolution">
+            <header>
+                <h2>Low Resolution</h2>
+                <p>Latest 12 Instagrams showing likes count and only 2 tags in low resolution.</p>
+            </header>
+            <article
+                class="instagramas"
+                data-show-tags="true"
+                data-show-tags-count="2"
+                data-show-likes="true"
+                data-render-type="low_resolution"
+                data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
+                data-count="12"
+                ></article>
+            <footer>
+                <h4><i class="fa fa-code"></i> Code</h4>
+                <pre>
+                    <code class="language-html">
+    &lt;article
+        class="instagramas"
+        data-show-tag="false"
+        data-show-tags-count="2"
+        data-show-likes="true"
+        data-render-type="low_resolution"
+        data-access-token="INSERT_ACCESS_TOKEN_HERE"
+        data-count="12"&gt;
+    &lt;/article&gt;
+                    </code>
+                </pre>
+            </footer>
+        </section>
+        <section class="gallery standard-resolution">
+            <header>
+                <h2>Standard Resolution</h2>
+                <p>Latest 5 Instagrams showing likes count and all tags in standard resolution.</p>
+            </header>
+            <article
+                class="instagramas"
+                data-show-tags="true"
+                data-show-likes="true"
+                data-render-type="standard_resolution"
+                data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
+                data-count="5"
+                ></article>
+            <footer>
+                <h4><i class="fa fa-code"></i> Code</h4>
+                <pre>
+                    <code class="language-html">
+    &lt;article
+        class="instagramas"
+        data-show-tag="true"
+        data-show-likes="true"
+        data-render-type="standard_resolution"
+        data-access-token="INSERT_ACCESS_TOKEN_HERE"
+        data-count="5"&gt;
+    &lt;/article&gt;
+                    </code>
+                </pre>
+            </footer>
+        </section>
+        <section id="styles">
+            <article>
+                <h2>Notes about styles</h2>
+                <p>Instagrama's markup is pretty simple and nicely nested, quite easy to personalize with CSS.</p>
+                <pre>
+                    <code class="language-html">
+    &lt;article class="instagramas" data-show-tags="true" data-show-likes="true" data-render-type="standard_resolution" data-count="5" data-state="ready">
+        &lt;figure class=".instagrama-image"&gt;
+            &lt;a target="_blank" class="instagrama" href="https://www.instagram.com/p/BDvG1gzi_ZU/"&gt;
+                &lt;img alt="Olivier Miche #unsplash #fog #blackandwhite" src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/12917959_853247168138125_2039859613_n.jpg?ig_cache_key=MTIyMDIyNDA4OTY3NjU3NjM0MA%3D%3D.2"&gt;
+                &lt;figcaption class="instagrama-likes"&gt;1&lt;/figcaption&gt;
+                &lt;figcaption class="instagrama-tags"&gt;
+                    &lt;span class="instagrama-tag"&gt;fog&lt;/span&gt;
+                    &lt;span class="instagrama-tag"&gt;unsplash&lt;/span&gt;
+                    &lt;span class="instagrama-tag"&gt;blackandwhite&lt;/span&gt;
+                &lt;/figcaption&gt;
+            &lt;/a&gt;
+        &lt;/figure&gt;
+        &lt;figure class=".instagrama-image"&gt;
+            &lt;a target="_blank" class="instagrama" href="https://www.instagram.com/p/BDvGoNhi_Yu/"&gt;
+                &lt;img alt="Rob Bye #unsplash #sand #beach" src="https://scontent.cdninstagram.com/t51.2885-15/s640x640/sh0.08/e35/12935093_1013162018773257_1196249137_n.jpg?ig_cache_key=MTIyMDIyMzE3NTYyMDI5NDE5MA%3D%3D.2"&gt;
+                &lt;figcaption class="instagrama-likes"&gt;0&lt;/figcaption&gt;
+                &lt;figcaption class="instagrama-tags"&gt;
+                    &lt;span class="instagrama-tag"&gt;beach&lt;/span&gt;
+                    &lt;span class="instagrama-tag"&gt;sand&lt;/span&gt;
+                    &lt;span class="instagrama-tag"&gt;unsplash&lt;/span&gt;
+                &lt;/figcaption&gt;
+            &lt;/a&gt;
+        &lt;/figure&gt;
+    &lt;article&gt;
+                    </code>
+                </pre>
+                <p>Apart from class names, the most interesting attribute for styling here is <code>data-state</code>. This attribute will be updated in every state change mainly to inform, but also, to allow the CSS be able to define personalized states. Currently there are 6 possible states:</p>
+                <ul>
+                    <li>initiated</li>
+                    <li>get:in-progress</li>
+                    <li>get:success</li>
+                    <li>get:error</li>
+                    <li>created</li>
+                    <li>ready</li>
+                </ul>
+                <p>You could use something like this in your CSS to add more interactivity.</p>
+                <pre>
+                    <code class="language-css">
+    .instagramas { transform: scale(.5); }
+    .instagramas figcaption { display: none; }
+    .instagramas[data-state="ready"] { transform: scale(1); }
+    .instagramas[data-state="ready"] figcaption { display: block; }
+                    </code>
+                </pre>
+            </article>
+        </section>
+        <section>
+            <h3><i class="fa fa-bug"></i> Found issues?</h3>
+            <p>Github Issue Tracker</p>
+        </section>
+        <footer class="end-of-page">
+            <p>Crafted by <a href="http://www.natansantolo.com" targe="_blank">Natan</a></p>
+        </footer>
+        <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../dist/instagramas.min.js"></script>
+        <script src="lib/prism.js"></script>
+    </body>
+</html>
