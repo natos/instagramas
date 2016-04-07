@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         "pkg": grunt.file.readJSON('package.json'),
         "uglify": {
             "options": {
-                "banner": '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */',
+                "banner": '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */',
                 "wrap": true,
                 "sourceMap": true,
                 "sourceMapIncludeSources": true,
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
             },
             "site": {
                 "src": [
-                    'src/jquery-ajax.js',
+                    'jsonp.js',
                     'src/*.js'
 
                 ],
