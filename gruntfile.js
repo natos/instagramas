@@ -17,7 +17,7 @@ module.exports = function(grunt) {
             },
             "build": {
                 "src": [
-                    'src/jquery-ajax.js',
+                    'jsonp.js',
                     'src/*.js'
 
                 ],
