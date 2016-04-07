@@ -50,7 +50,7 @@ Full
 
 ### Author
 
-    Natan Santolo, @natos, natansantolo.com
+    natansantolo.com
 
 ### Unlicense
 
