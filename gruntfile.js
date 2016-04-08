@@ -16,20 +16,21 @@ module.exports = function(grunt) {
                 "sourceMapName": 'dist/<%= pkg.name %>.min.js.map'
             },
             "build": {
-                "src": [
-                    'jsonp.js',
-                    'src/*.js'
-
-                ],
+                "src": ['src/*.js'],
                 "dest": 'dist/<%= pkg.name %>.min.js'
             },
             "site": {
-                "src": [
-                    'jsonp.js',
-                    'src/*.js'
-
-                ],
+                "src": ['src/*.js'],
                 "dest": 'test/lib/<%= pkg.name %>.min.js'
+            },
+            "compile": {
+                "options": {
+                    'compress': false,
+                    'beautify': true,
+                    // 'mangle': false
+                },
+                "src": ['src/*.js'],
+                "dest": 'dist/<%= pkg.name %>.js'
             }
         },
         "watch": {
@@ -57,7 +58,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     // Compile web site
-    grunt.registerTask('compile', ['clean', 'uglify', 'copy']);
+    grunt.registerTask('compile', ['clean', 'uglify', 'copy', 'watch']);
     grunt.registerTask('default', ['compile']);
 
 };

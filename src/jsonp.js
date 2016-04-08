@@ -2,9 +2,9 @@
  * jsonp.js
  */
 
-(function(window, document) {
+// (function(window, document) {
 
-    'use strict';
+    // 'use strict';
 
     var count = 0;
 
@@ -63,4 +63,4 @@
         get: get
     };
 
-}(window, document));
+// }(window, document));

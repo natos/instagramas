@@ -5,9 +5,12 @@
  * @require jsonp.js
  */
 
-(function($w, $d) {
+// (function($w, $d) {
 
-    'use strict';
+    var $w = window,
+        $d = document;
+
+    // 'use strict';
 
     var API_PREFIX = 'https://api.instagram.com/v1/users/self/media/recent/?';
 
@@ -205,7 +208,6 @@
             tags = '',
             likes = 0;
 
-        // figure = $d.createElement('figure');
         figure = HTMLElement.new('figure');
         figure.className = 'instagrama-' + $this.data.type;
 
@@ -216,7 +218,6 @@
         a.href = $this.data.link;
         figure.appendChild(a);
 
-        // img = $d.createElement('img');
         img = HTMLElement.new('img');
         img.alt = $this.data.caption.text;
         img.src = $this.data.images[$this.parent.renderType].url;
@@ -227,7 +228,6 @@
 
         // likes
         if ($this.parent.showLikes) {
-            // likescaption = $d.createElement('figcaption');
             likescaption = HTMLElement.new('figcaption');
             likescaption.className = 'instagrama-likes';
             likescaption.innerHTML = $this.data.likes.count;
@@ -243,8 +243,6 @@
                 }
                 tags += template.tag.replace('{{tag}}', $this.data.tags[i]);
             }
-
-            // tagscaption = $d.createElement('figcaption');
             tagscaption = HTMLElement.new('figcaption');
             tagscaption.className = 'instagrama-tags';
             tagscaption.innerHTML = tags;
@@ -261,33 +259,31 @@
     * Will find all instances of instagramas in the document
     */
     var instagramas = $d.querySelectorAll('.instagramas');
-    if (instagramas === undefined || instagramas === null) {
-        return;
+    if (instagramas !== undefined || instagramas !== null) {
+        /**
+        * @private
+        * Instagramas namespace can be predefined by setting a string in the global
+        * variable `_instagramas_namespace` with the name of your choosing, otherwise
+        * will automatically use the defautl value `_Instagramas`.
+        */
+        var namespace = $w._instagramas_namespace || '_Instagramas';
+
+        /**
+        * @public
+        * Define the namespace to store instagramas instances.
+        */
+        $w[namespace] = {
+            collection: []
+        };
+
+        /*
+        * Start, when DOM ready, create a Instagramas instance for each match.
+        */
+        $d.addEventListener("DOMContentLoaded", function start() {
+            for (var i = 0; i < instagramas.length; i += 1) {
+                $w[namespace].collection.push(new Instagramas(instagramas[i]));
+            }
+        });
     }
 
-    /**
-    * @private
-    * Instagramas namespace can be predefined by setting a string in the global
-    * variable `_instagramas_namespace` with the name of your choosing, otherwise
-    * will automatically use the defautl value `_Instagramas`.
-    */
-    var namespace = $w._instagramas_namespace || '_Instagramas';
-
-    /**
-    * @public
-    * Define the namespace to store instagramas instances.
-    */
-    $w[namespace] = {
-        collection: []
-    };
-
-    /*
-    * Start, when DOM ready, create a Instagramas instance for each match.
-    */
-    $d.addEventListener("DOMContentLoaded", function start() {
-        for (var i = 0; i < instagramas.length; i += 1) {
-            $w[namespace].collection.push(new Instagramas(instagramas[i]));
-        }
-    });
-
-}(window, document));
+// }(window, document));
