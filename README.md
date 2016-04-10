@@ -1,4 +1,4 @@
-# Instagramas v1.1.2
+# Instagramas v1.1.3
 
 Instagramas will render a list of your latest instagrams.
 

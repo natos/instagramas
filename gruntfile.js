@@ -27,7 +27,7 @@ module.exports = function(grunt) {
                 "options": {
                     'compress': false,
                     'beautify': true,
-                    // 'mangle': false
+                    'mangle': false
                 },
                 "src": ['src/*.js'],
                 "dest": 'dist/<%= pkg.name %>.js'
