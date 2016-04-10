@@ -1,4 +1,4 @@
-/*! instagramas 1.1.2 2016-04-10 */
+/*! instagramas 1.1.3 2016-04-10 */
 (function(exports, global) {
     var $w = window, $d = document;
     var API_PREFIX = "https://api.instagram.com/v1/users/self/media/recent/?";

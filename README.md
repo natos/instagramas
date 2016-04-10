@@ -2,6 +2,8 @@
 
 Instagramas will render a list of your latest instagrams.
 
+[View the demo page](http://natos.github.io/instagramas/)
+
 ![Instagramas](https://raw.githubusercontent.com/natos/instagramas/master/test/instagramas.png)
 
 ## Properties

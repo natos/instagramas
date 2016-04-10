@@ -58,7 +58,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     // Compile web site
-    grunt.registerTask('compile', ['clean', 'uglify', 'copy', 'watch']);
+    grunt.registerTask('compile', ['clean', 'uglify', 'copy']);
+    grunt.registerTask('build', ['compile', 'watch']);
     grunt.registerTask('default', ['compile']);
 
 };
