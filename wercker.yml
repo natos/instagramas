@@ -8,9 +8,8 @@ build:
 
 deploy:
   steps:
-    - install-packages:
-        packages: git ssh-client
-    - lukevivier/gh-pages@0.2.1:
+    - uetchy/gh-pages:
         token: $GIT_TOKEN
-        basedir: public
-        branch: master
+        repo: instagramas/natos.github.io
+        domain: natos.github.io/instagramas
+        path: public
