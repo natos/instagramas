@@ -1,4 +1,4 @@
-box: yahsan2/grunt
+box: node
 
 build:
   steps:
@@ -7,7 +7,9 @@ build:
 
 deploy:
   steps:
-    - gh-pages:
+    - install-packages:
+        packages: git ssh-client
+    - lukevivier/gh-pages@0.2.1:
         token: $GIT_TOKEN
-        domain: luke.vivier.ca
         basedir: public
+        branch: master
