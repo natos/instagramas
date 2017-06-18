@@ -2,9 +2,14 @@ box: node
 
 build:
   steps:
-    - npm-install
-    - grunt:
-        tasks: compile
+    - script:
+        name: install dependencies
+        code: |
+          npm install -g grunt
+    - script:
+        name: compile
+        code: |
+          ./node_modules/grunt/bin/grunt.js compile
 
 deploy:
   steps:
