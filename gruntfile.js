@@ -60,6 +60,6 @@ module.exports = function(grunt) {
     // Compile web site
     grunt.registerTask('compile', ['clean', 'uglify', 'copy']);
     grunt.registerTask('build', ['compile', 'watch']);
-    grunt.registerTask('default', ['compile']);
+    grunt.registerTask('default', ['build']);
 
 };

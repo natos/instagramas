@@ -1,0 +1,68 @@
+/* Styles for Heather - A Hyperminimal Jekyll Theme */
+
+/* BASSCSS Reset - http://jxnblk.github.io/basscss */
+html {
+  -webkit-font-smoothing: antialiased;
+}
+body, h1, h2, h3, h4, h5, h6, dl, ol, ul, p,
+button, input, select, textarea { margin: 0; }
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+article, aside, details, figcaption, figure, footer, header, main, nav, section, summary { display: block; }
+body {
+  color: #333;
+  background-color: #eee;
+  font-size: 100%;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.75;
+  min-height: 100%;
+  background-color: #fefefe;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+body * { box-sizing: border-box; }
+h1, h2, h3, h4, h5, h6, ul, ol, p {
+  padding: .5rem 1rem 1rem;
+}
+h1 { font-size: 6.854em; }
+h1 { font-size: 4.236em; }
+h2 { font-size: 2.618em; }
+h3 { font-size: 1.618em; }
+h4 { font-size: 1em; }
+h5 { font-size: .9em; }
+h6 { font-size: .82em; }
+p { font-size: 1.1em; }
+h1 .version {
+ font-size: 1rem;
+ line-height: 6.854em;
+}
+h1 .version:before {
+  content: "v";
+}
+/* lists */
+ul, ol, dl { padding: 0 0 1.5em 2.5rem; }
+li { margin-left: 1em; }
+
+/* paragraph */
+p {
+  margin-bottom: .5em;
+}
+header,
+footer {
+    text-align: center;
+}
+footer.end-of-page {
+  padding: 1rem;
+  border-top: 1rem solid #ccc;
+  background-color: #bbb;
+  color: #333;
+}
+.properties {
+  margin: 0 2rem;
+}
+section pre[class*="language-"] {
+  margin: 3rem;
+  margin-top: 0;
+}

@@ -8,25 +8,17 @@
         <meta name="keywords" content="Instagramas Instagram Demo">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="layout.css" />
         <link rel="stylesheet" href="instagrams.css" />
         <link rel="stylesheet" href="lib/prism.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-75968967-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
     </head>
     <body>
         <header>
             <p><a href="#styles">styles</a> <a href="http://github.com/natos/instagramas" target="_blank">source</a> <a href="http://github.com/natos/instagramas/issues" target="_blank">issues</a></p>
-            <h1><i class="fa fa-instagram"></i> Instagramas <span class="version">1.1.3</span></h1>
+            <h1><i class="fa fa-instagram"></i> Instagramas <span class="version">1.1.4</span></h1>
         </header>
+
         <section class="gallery demo">
             <header>
                 <h3>Demo Gallery</h3>
@@ -36,11 +28,26 @@
                 data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
                 ></article>
         </section>
+
         <section>
             <article>
-                <p>This is pretty easy, let's start!</p>
+                <p>This is pretty easy:</p>
+                <ol>
+                  <li>Get your Instagram access token: <a href="http://jelled.com/instagram/access-token" target="_blank"><em>How to generate an Instagram Access Token</em></a></li>
+                  <li>Place the <code>&lt;script src="dist/instagramas.min.js" &gt;&lt;/script&gt;</code> script tag at the bottom of your page</li>
+                  <li>Add the instagramas gallery tag <code>&lt;section class="instagramas" data-access-token="INSERT_ACCESS_TOKEN_HERE"&gt;&lt;/section&gt;</code> wherever you want</li>
+                  <li>Done!</li>
+                </ol>
+                <h3>Check this examples:</h3>
+                <ol>
+                  <li><a href="#minimal">Minimal</a>
+                  <li><a href="#thumbnails">Thumbnails</a>
+                  <li><a href="#low-resolution">Low Resolution</a>
+                  <li><a href="#standard-resolution">Standard Resolution</a>
+                </ol>
+                <h3>Let's start!</h3>
                 <p>First go and get a valid access token from Instagram, if you are not so sure how to do it, you can find all you need in <a href="https://www.instagram.com/developer/authentication/" target="_blank">Instagram's API Documentation</a>, or follow this article <a href="http://jelled.com/instagram/access-token" target="_blank"><em>How to generate an Instagram Access Token</em></a>. Got it? Cool, let's continue.</p>
-                <p>To render a gallery the trick is to add instagramas.js script at the end of your document and add the class name "instagramas" to any element you want to be the container of the gallery, you can add as many as you want. The script will ask the DOM to find all the "instagramas" and will create a Instagram gallery using the <strong>data-access-token</strong> provided for each match.</p>
+                <p>To render a gallery the trick is to add <code>&lt;script src="dist/instagramas.min.js" &gt;&lt;/script&gt;</code> script at the end of your document and add the class name "instagramas" to any element you want to be the container of the gallery, you can add as many as you want. The script will ask the DOM to find all the "instagramas" and will create a Instagram gallery using the <strong>data-access-token</strong> provided for each match.</p>
                 <p>To illustrate the implementation, please take a look at this simple example:</p>
                 <pre>
                     <code class="language-html">
@@ -88,10 +95,12 @@
                     <dt><strong>data-count</strong> <em>int</em></dt>
                     <dd>Optional how many Instagram will show
                     <dd>Default value <em>5</em></dd>
+                    <dd>Max value <em>20</em></dd>
                 </dl>
             </article>
         </section>
-        <section class="gallery minimal">
+
+        <section class="gallery minimal" id="minimal">
             <header>
                 <h2>Minimal</h2>
                 <p>The minimal verision will show latest 5 Instagrams, no likes count or tags in thumbnail format.</p>
@@ -109,10 +118,11 @@
                 </pre>
             </footer>
         </section>
-        <section class="gallery thumbnails">
+
+        <section class="gallery thumbnails" id="thumbnails">
             <header>
                 <h2>Thumbnails</h2>
-                <p>Latest 21 Instagrams showing likes count and only one tag in thumbnail format.</p>
+                <p>Latest 20 Instagrams showing likes count and only one tag in thumbnail format.</p>
             </header>
             <article
                 class="instagramas"
@@ -121,7 +131,7 @@
                 data-show-likes="false"
                 data-render-type="thumbnail"
                 data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
-                data-count="21"
+                data-count="20"
                 ></article>
             <footer>
                 <h4><i class="fa fa-code"></i> Code</h4>
@@ -134,13 +144,14 @@
         data-show-likes="false"
         data-render-type="thumbnail"
         data-access-token="INSERT_ACCESS_TOKEN_HERE"
-        data-count="21"&gt;
+        data-count="20"&gt;
     &lt;/article&gt;
                     </code>
                 </pre>
             </footer>
         </section>
-        <section class="gallery low-resolution">
+
+        <section class="gallery low-resolution" id="low-resolution">
             <header>
                 <h2>Low Resolution</h2>
                 <p>Latest 12 Instagrams showing likes count and only 2 tags in low resolution.</p>
@@ -152,7 +163,7 @@
                 data-show-likes="true"
                 data-render-type="low_resolution"
                 data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
-                data-count="12"
+                data-count="9"
                 ></article>
             <footer>
                 <h4><i class="fa fa-code"></i> Code</h4>
@@ -165,16 +176,17 @@
         data-show-likes="true"
         data-render-type="low_resolution"
         data-access-token="INSERT_ACCESS_TOKEN_HERE"
-        data-count="12"&gt;
+        data-count="9"&gt;
     &lt;/article&gt;
                     </code>
                 </pre>
             </footer>
         </section>
-        <section class="gallery standard-resolution">
+
+        <section class="gallery standard-resolution" id="standard-resolution">
             <header>
                 <h2>Standard Resolution</h2>
-                <p>Latest 5 Instagrams showing likes count and all tags in standard resolution.</p>
+                <p>Latest 7 Instagrams showing likes count and all tags in standard resolution.</p>
             </header>
             <article
                 class="instagramas"
@@ -182,7 +194,7 @@
                 data-show-likes="true"
                 data-render-type="standard_resolution"
                 data-access-token="3097125764.2ca1458.c7f356080db142439d0580f0689bf86d"
-                data-count="5"
+                data-count="7"
                 ></article>
             <footer>
                 <h4><i class="fa fa-code"></i> Code</h4>
@@ -200,6 +212,7 @@
                 </pre>
             </footer>
         </section>
+
         <section id="styles">
             <article>
                 <h2>Notes about styles</h2>
@@ -263,7 +276,15 @@
         <footer class="end-of-page">
             <p>Crafted by <a href="http://www.natansantolo.com" targe="_blank">Natan Santolo</a></p>
         </footer>
-        <script src="lib/instagramas.min.js"></script>
+        <script src="../dist/instagramas.js"></script>
         <script src="lib/prism.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-75968967-1', 'auto');
+          ga('send', 'pageview');
+        </script>
     </body>
 </html>

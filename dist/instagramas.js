@@ -1,4 +1,4 @@
-/*! instagramas 1.1.3 2016-04-10 */
+/*! instagramas 1.1.4 2017-06-18 */
 (function(exports, global) {
     var $w = window, $d = document;
     var API_PREFIX = "https://api.instagram.com/v1/users/self/media/recent/?";
@@ -21,12 +21,17 @@
         },
         "data-count": {
             attributeName: "count",
-            defaultValue: 5
+            defaultValue: 5,
+            maxValue: 20
         }
     };
+    var placeholderSize = {
+        thumbnail: "150",
+        low_resolution: "320",
+        standard_resolution: "640"
+    };
     var template = {
-        tag: '<span class="instagrama-tag">{{tag}}</span>',
-        loader: '<div class="spinner"><div class="dot1"></div><div class="dot2"></div></div>'
+        tag: '<span class="instagrama-tag">{{tag}}</span>'
     };
     var HTMLElement = {
         _: function(c) {
@@ -101,17 +106,15 @@
         for (var member in data) {
             $this[data[member].attributeName] = isBoolean(data[member].defaultValue) ? element.getAttribute(member) === "true" || data[member].defaultValue : element.getAttribute(member) || data[member].defaultValue;
         }
+        $this.count = parseInt($this.count > data["data-count"].maxValue ? data["data-count"].maxValue : $this.count, 10);
         var source = API_PREFIX + "count=" + $this.count + "&amp;" + "access_token=" + access_token;
-        $this.loader = HTMLElement.new("div");
-        $this.loader.className = "loader";
-        $this.loader.innerHTML = template.loader;
-        $this.element.appendChild($this.loader);
-        $this.element.setAttribute("data-state", "initiated");
-        $this.get(source, $this.create);
+        $this.create().get(source, $this.create);
     };
     Instagramas.prototype.childLoaded = function() {
         var $this = this;
-        if ($this.children.length === $this.childrenLoaded) {
+        console.log("childLoaded", typeof $this.childrenLoaded, $this.childrenLoaded, "this.count", typeof $this.count, $this.count);
+        if ($this.count === $this.childrenLoaded) {
+            console.log("done! childrenLoaded for ", $this);
             $this.childrenLoaded = null;
             delete $this.childrenLoaded;
             return $this.ready();
@@ -120,10 +123,8 @@
         return $this;
     };
     Instagramas.prototype.ready = function() {
-        var $this = this;
-        $this.element.setAttribute("data-state", "ready");
-        $this.element.removeChild($this.loader);
-        return $this;
+        this.element.setAttribute("data-state", "ready");
+        return this;
     };
     Instagramas.prototype.get = function(source, callback) {
         var $this = this;
@@ -136,63 +137,111 @@
         return $this;
     };
     Instagramas.prototype.create = function(response) {
-        var $this = this;
         var i;
-        if (!response.data) {
-            return;
+        for (i = 0; i < this.count; i += 1) {
+            var data = response && response.data && response.data[i];
+            if (this.children[i] && data) {
+                this.children[i].load(data);
+            } else {
+                this.children.push(new Instagrama(this));
+            }
         }
-        for (i = 0; i < response.data.length; i += 1) {
-            $this.children.push(new Instagrama(response.data[i], $this));
-        }
-        $this.element.setAttribute("data-state", "created");
-        return $this;
+        this.element.setAttribute("data-state", "created");
+        return this;
     };
-    var Instagrama = function($data, $parent) {
+    var Instagrama = function($parent) {
+        if (!$parent) {
+            return this;
+        }
+        this.parent = $parent;
+        this.element = {};
+        this.render();
+        return this;
+    };
+    Instagrama.prototype.load = function($data) {
         if (!$data) {
             return this;
         }
-        var $this = this;
-        $this.parent = $parent;
-        $this.data = $data;
-        $this.render();
-        return $this;
+        this.data = $data;
+        this.render();
+        return this;
+    };
+    Instagrama.prototype.hasData = function() {
+        return typeof this.data !== "undefined" && this.data;
     };
     Instagrama.prototype.render = function() {
-        var $this = this, figure, tagscaption, likescaption, a, i, t, img, tags = "", likes = 0;
-        figure = HTMLElement.new("figure");
-        figure.className = "instagrama-" + $this.data.type;
-        a = HTMLElement.new("a");
-        a.target = "_blank";
-        a.className = "instagrama";
-        a.href = $this.data.link;
-        figure.appendChild(a);
-        img = HTMLElement.new("img");
-        img.alt = $this.data.caption.text;
-        img.src = $this.data.images[$this.parent.renderType].url;
-        img.onload = function() {
-            $this.parent.childLoaded.apply($this.parent, arguments);
-        };
-        a.appendChild(img);
-        if ($this.parent.showLikes) {
-            likescaption = HTMLElement.new("figcaption");
-            likescaption.className = "instagrama-likes";
-            likescaption.innerHTML = $this.data.likes.count;
-            a.appendChild(likescaption);
+        var $this = this;
+        if (!$this.element.figure) {
+            $this.element.figure = HTMLElement.new("figure");
+            $this.element.figure.className = "instagrama-" + $this.parent.renderType;
+            $this.element.a = HTMLElement.new("a");
+            $this.element.a.target = "_blank";
+            $this.element.a.className = "instagrama";
+            $this.element.figure.appendChild($this.element.a);
         }
-        if ($this.parent.showTags) {
-            t = $this.parent.showTagsCount || $this.data.tags.length;
+        $this.drawImage().drawLikes().drawTags();
+        $this.parent.element.appendChild($this.element.figure);
+        if ($this.hasData()) {
+            $this.element.a.href = $this.data.link;
+        }
+        return $this;
+    };
+    Instagrama.prototype.drawImage = function() {
+        var $this = this, size = 0;
+        if (!$this.element.img) {
+            $this.element.img = HTMLElement.new("img");
+            $this.element.img.className = "placeholder";
+            size = placeholderSize[$this.parent.renderType];
+            if (size) {
+                $this.element.img.style = [ "width:", size, "px;height:", size, "px;" ].join();
+            }
+            $this.element.a.appendChild($this.element.img);
+        }
+        if ($this.hasData()) {
+            $this.element.img.setAttribute("id", "i" + $this.data.id);
+            $this.element.img.setAttribute("alt", $this.data.caption.text);
+            $this.element.img.setAttribute("src", $this.data.images[$this.parent.renderType].url);
+            $this.element.img.onload = function() {
+                $this.parent.childLoaded.apply($this.parent, arguments);
+            };
+        }
+        return $this;
+    };
+    Instagrama.prototype.drawLikes = function() {
+        if (!this.parent.showLikes) {
+            return this;
+        }
+        var $this = this, likes = 0;
+        if (!$this.element.likescaption) {
+            $this.element.likescaption = HTMLElement.new("figcaption");
+            $this.element.likescaption.className = "instagrama-likes";
+            $this.element.a.appendChild($this.element.likescaption);
+        }
+        if ($this.hasData()) {
+            $this.element.likescaption.innerHTML = $this.data.likes.count;
+        }
+        return $this;
+    };
+    Instagrama.prototype.drawTags = function() {
+        if (!this.parent.showTags) {
+            return this;
+        }
+        var $this = this;
+        if (!$this.element.tagscaption) {
+            $this.element.tagscaption = HTMLElement.new("figcaption");
+            $this.element.tagscaption.className = "instagrama-tags";
+            $this.element.a.appendChild($this.element.tagscaption);
+        }
+        if ($this.hasData()) {
+            var tags = "", i, t = $this.parent.showTagsCount || $this.data.tags.length;
             for (i = 0; i < t; i += 1) {
                 if (!$this.data.tags[i]) {
                     continue;
                 }
                 tags += template.tag.replace("{{tag}}", $this.data.tags[i]);
             }
-            tagscaption = HTMLElement.new("figcaption");
-            tagscaption.className = "instagrama-tags";
-            tagscaption.innerHTML = tags;
-            a.appendChild(tagscaption);
+            $this.element.tagscaption.innerHTML = tags;
         }
-        $this.parent.element.appendChild(figure);
         return $this;
     };
     var context = this;
