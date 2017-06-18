@@ -1,4 +1,4 @@
-box: yahsan2/grunt@0.0.1
+box: yahsan2/grunt
 
 build:
   steps:
