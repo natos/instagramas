@@ -1,4 +1,4 @@
-# Instagramas v1.1.3
+# Instagramas v1.1.4
 
 Instagramas will render a list of your latest instagrams.
 
@@ -20,7 +20,7 @@ List of properties:
 
 * ```data-render-type {string}``` Optional values ```"thumbnail|low_resolution|standard_resolution"```, thumbnail by default
 
-* ```data-count {int}```  Optional how many Instagram will show, 5 by default
+* ```data-count {int}```  Optional how many Instagram will show, 5 by default, 20 max
 
 ### Usage
 
@@ -41,7 +41,7 @@ Full
     data-show-likes="true"
     data-render-type="thumbnail"
     data-access-token="INSERT_ACCESS_TOKEN_HERE"
-    data-count="21"
+    data-count="20"
 ></div>
 ```
 
