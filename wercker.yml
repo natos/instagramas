@@ -1,4 +1,4 @@
-box: wercker/default
+box: yahsan2/grunt@0.0.1
 
 build:
   steps:
