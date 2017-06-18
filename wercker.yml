@@ -1,3 +1,8 @@
+build:
+  steps:
+    - grunt:
+        tasks: compile
+
 deploy:
   steps:
     - gh-pages:
