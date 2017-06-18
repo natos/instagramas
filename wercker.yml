@@ -1,3 +1,5 @@
+box: wercker/default
+
 build:
   steps:
     - grunt:
