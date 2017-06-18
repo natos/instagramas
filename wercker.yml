@@ -3,14 +3,8 @@ box: node
 build:
   steps:
     - npm-install
-    - script:
-        name: install dependencies
-        code: |
-          npm install -g grunt
-    - script:
-        name: compile
-        code: |
-          grunt compile
+    - grunt:
+        tasks: compile
 
 deploy:
   steps:
