@@ -2,6 +2,7 @@ box: node
 
 build:
   steps:
+    - npm-install
     - script:
         name: install dependencies
         code: |
@@ -9,7 +10,7 @@ build:
     - script:
         name: compile
         code: |
-          ./node_modules/grunt/lib/grunt.js compile
+          grunt compile
 
 deploy:
   steps:
