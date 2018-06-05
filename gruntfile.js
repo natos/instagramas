@@ -49,10 +49,23 @@ module.exports = function(grunt) {
                 src: '**',
                 dest: 'public/'
             }
+        }, 
+        connect: {
+            server: {
+                options: {
+                    port: 3030, // custom port
+                    base: './test', // current directory for 'index.html' is root
+                    keepalive: true, // keep the server alive indefinitely
+                    open: {
+                        target: 'http://localhost:3030',
+                    }
+                }
+            }
         }
     };
 
     grunt.initConfig(gruntConfig);
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
